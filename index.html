@@ -63,6 +63,13 @@
         transform: scaleX(-1); /* Sin espejo en móviles */
       }
     }
+    /* Mostrar controles siempre en móviles */
+    @media (max-width: 768px) {
+      .custom-controls {
+        opacity: 1 !important;
+      }
+    }
+
     
     /* Rotación SOLO en PC */
     @media (min-width: 769px) {
@@ -458,4 +465,3 @@
   </script>
 </body>
 </html>
-
