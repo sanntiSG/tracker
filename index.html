@@ -42,14 +42,17 @@
       transition: all 0.9s cubic-bezier(.2,.9,.3,1);
     }
     
-    /* Cuando el video está rotado, expandir horizontalmente */
-    .video-container.expanded {
-      width: 120%;
-      margin-left: -10%;
+    /* Cuando el video está rotado, expandir horizontalmente SOLO EN PC */
+    @media (min-width: 769px) {
+      .video-container.expanded {
+        width: 120%;
+        margin-left: -10%;
+      }
     }
     
     .video-wrapper {
-      transform: scaleX(-1); /* Corrige el espejo en PC */
+      /* En PC: con espejo, en móvil: sin espejo */
+      transform: scaleX(-1); /* Espejo por defecto para PC */
       transform-origin: center;
       transition: transform 0.9s cubic-bezier(.2,.9,.3,1);
     }
@@ -61,14 +64,10 @@
       }
     }
     
-    .video-wrapper.rotated {
-      transform: scaleX(-1) rotate(90deg); /* Rotación + espejo en PC */
-    }
-    
-    /* Rotación diferente para móviles */
-    @media (max-width: 768px) {
+    /* Rotación SOLO en PC */
+    @media (min-width: 769px) {
       .video-wrapper.rotated {
-        transform: scaleX(1) rotate(-90deg); /* Rotación sin espejo en móviles */
+        transform: scaleX(-1) rotate(90deg); /* Rotación + espejo solo en PC */
       }
     }
 
@@ -196,23 +195,9 @@
       .logo{width:66px;height:66px}
     }
     
-    @media (max-width:768px) {
-      /* En móviles, expandir más cuando el video rota */
-      .video-container.expanded {
-        width: 140%;
-        margin-left: -20%;
-      }
-    }
-    
     @media (max-width:520px){
       header{font-size:1.4rem;padding-top:30px}
       .logo{width:56px;height:56px}
-      
-      /* En móviles pequeños, expandir aún más */
-      .video-container.expanded {
-        width: 160%;
-        margin-left: -30%;
-      }
       
       .video-meta {
         flex-direction: column;
@@ -254,7 +239,7 @@
 
         <div class="video-container" id="videoContainer">
           <div class="video-wrapper" id="videoWrapper">
-            <video id="projectVideo" preload="metadata">
+            <video id="projectVideo" preload="metadata" playsinline>
               <source src="Tracker2.mp4" type="video/mp4">
               Tu navegador no soporta video HTML5.
             </video>
@@ -374,8 +359,8 @@
     const volumeSlider = document.getElementById('volumeSlider');
     const volumeLevel = document.getElementById('volumeLevel');
 
-    // Detectar si es móvil
-    const isMobile = window.innerWidth <= 768;
+    // Detectar si es PC (ancho mayor a 768px)
+    const isPC = window.innerWidth > 768;
 
     // Formatear tiempo en minutos:segundos
     function formatTime(seconds) {
@@ -402,8 +387,10 @@
 
     video.addEventListener('timeupdate', updateProgress);
     
-    // Detectar rotación del video y expandir contenedor
+    // Detectar rotación del video SOLO EN PC
     video.addEventListener('timeupdate', () => {
+      if (!isPC) return; // Solo aplicar rotación en PC
+      
       const shouldRotate = video.currentTime >= 42 && video.currentTime < 66;
       
       if (shouldRotate) {
@@ -468,15 +455,6 @@
 
     // Inicializar volumen
     volumeLevel.style.width = `${video.volume * 100}%`;
-    
-    // Manejar cambios de tamaño de ventana
-    window.addEventListener('resize', () => {
-      // Si cambia entre móvil y desktop, recargar para aplicar los estilos correctos
-      const newIsMobile = window.innerWidth <= 768;
-      if (newIsMobile !== isMobile) {
-        location.reload();
-      }
-    });
   </script>
 </body>
 </html>
