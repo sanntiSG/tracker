@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tracker — Presentación</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg-1: #071019;
+      --bg-2: #0f3a45;
+      --glass: rgba(255,255,255,0.06);
+      --accent: #00d4ff;
+      --muted: rgba(255,255,255,0.75);
+      --card-radius: 18px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg,var(--bg-1),var(--bg-2));
+      color:#fff; -webkit-font-smoothing:antialiased; overflow-x:hidden; padding-bottom:40px;
+    }
+
+    header{
+      text-align:center;padding:48px 18px 22px; font-size:2.4rem; letter-spacing:2px; font-weight:800;
+      animation:slideDown .9s cubic-bezier(.2,.9,.3,1);
+    }
+    @keyframes slideDown{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:none}}
+
+    .container{max-width:1100px;margin:0 auto;padding:18px}
+
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-top:8px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:var(--card-radius);padding:18px;box-shadow:0 8px 30px rgba(2,6,23,0.5);backdrop-filter: blur(6px)}
+
+    .video-wrap{display:flex;flex-direction:column;gap:12px}
+    .video-wrapper {
+      transform: scaleX(-1); /* Corrige el espejo */
+      transform-origin: center;
+      transition: transform 0.9s cubic-bezier(.2,.9,.3,1);
+    }
+    .video-wrapper.rotated {
+      transform: scaleX(-1) rotate(90deg); /* Rotación + espejo corregido */
+    }
+
+    video{width:100%;border-radius:14px;border:1px solid rgba(255,255,255,0.06);box-shadow:0 10px 40px rgba(0,0,0,0.6)}
+
+    .video-meta{display:flex;justify-content:space-between;align-items:center}
+    .badge{background:linear-gradient(90deg,var(--accent),#5affc3);padding:6px 10px;border-radius:999px;color:#042; font-weight:700;font-size:.9rem}
+
+    .tech-row{display:flex;flex-direction:column;gap:14px;align-items:center;margin-top:28px}
+    .logos{display:flex;gap:18px;align-items:center;justify-content:center;flex-wrap:wrap}
+    .logo{width:76px;height:76px;padding:12px;border-radius:12px;background:var(--glass);display:flex;align-items:center;justify-content:center;transition:transform .25s, box-shadow .25s}
+    .logo img{max-width:100%;max-height:100%;filter:invert(1) contrast(120%)}
+    .logo:hover{transform:translateY(-6px) scale(1.04);box-shadow:0 14px 40px rgba(0,0,0,0.5)}
+
+    .tech-details{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px}
+    .tech-card{padding:14px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.04);min-height:160px;display:flex;flex-direction:column;gap:10px}
+    .tech-card h3{font-size:1.05rem;margin-top:6px}
+    .tech-card p{font-size:.93rem;color:var(--muted);line-height:1.45}
+    .tech-card .list{margin-top:auto;font-size:.88rem;color:rgba(255,255,255,0.85)}
+    .tech-card .pill{display:inline-block;background:rgba(255,255,255,0.03);padding:6px 8px;border-radius:8px;margin-right:6px;margin-top:8px;font-weight:600}
+
+    .about{margin-top:28px;text-align:left;line-height:1.6;font-size:1rem;color:rgba(255,255,255,0.95)}
+
+    footer{text-align:center;margin-top:36px;color:rgba(255,255,255,0.6);font-size:.9rem}
+
+    .reveal{opacity:0;transform:translateY(18px);animation:revealUp .9s forwards;animation-delay:.25s}
+    @keyframes revealUp{to{opacity:1;transform:none}}
+
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;}
+      .tech-details{grid-template-columns:1fr;}
+      .logo{width:66px;height:66px}
+    }
+    @media (max-width:520px){
+      header{font-size:1.4rem;padding-top:30px}
+      .logo{width:56px;height:56px}
+    }
+
+    .muted{color:var(--muted);font-size:.92rem}
+  </style>
+</head>
+<body>
+  <header>TRACKER DE VALORES AUTOMATIZADO</header>
+
+  <div class="container">
+    <div class="hero">
+      <div class="card reveal video-wrap">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div style="font-weight:700;font-size:1.05rem">Demostración del flujo</div>
+            <div class="muted" style="font-size:.9rem">Reproduzca el video para ver la interfaz y el flujo de datos</div>
+          </div>
+          <div class="badge">Automatizado</div>
+        </div>
+
+        <div class="video-wrapper">
+          <video id="projectVideo" controls preload="metadata">
+            <source src="Tracker2.mp4" type="video/mp4">
+            Tu navegador no soporta video HTML5.
+          </video>
+        </div>
+
+        <div class="video-meta" style="margin-top:8px">
+          <div class="muted">Duración: --:--</div>
+          <div class="muted">Captura de mediciones • Exportación a Excel</div>
+        </div>
+      </div>
+
+      <div class="card reveal" style="min-height:260px;display:flex;flex-direction:column;gap:12px;justify-content:center">
+        <div style="font-weight:800">Flujo de datos — Resumen</div>
+        <div class="muted">Este proyecto integra distintos bloques: captura y análisis por Python, UI en React y servidor Node.js que procesa y exporta a Excel.</div>
+
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+          <div style="background:rgba(255,255,255,0.03);padding:8px 10px;border-radius:10px;font-weight:700">Python → React → Node.js</div>
+          <div style="background:rgba(255,255,255,0.03);padding:8px 10px;border-radius:10px;font-weight:700">OCR • Detección Inteligente</div>
+          <div style="background:rgba(255,255,255,0.03);padding:8px 10px;border-radius:10px;font-weight:700">Exportación Excel</div>
+        </div>
+
+        <div style="margin-top:12px" class="muted">Descripción rápida: el módulo Python captura vídeo/webcam, realiza detección y OCR para extraer valores de torque. Los datos pasan a la interfaz React para visualización en tiempo real y desde allí se envían al servidor Node.js que analiza lotes y genera el Excel final.</div>
+      </div>
+    </div>
+
+    <section class="tech-row">
+      <div style="text-align:center;font-weight:700;font-size:1.05rem">⬇ Tecnologías utilizadas ⬇</div>
+
+      <div class="logos">
+        <div class="logo" title="Python">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python logo">
+        </div>
+        <div class="logo" title="React">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React logo">
+        </div>
+        <div class="logo" title="Node.js">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" alt="Node.js logo">
+        </div>
+        <div class="logo" title="OpenCV">
+          <img src="https://opencv.org/wp-content/uploads/2020/07/cropped-OpenCV_logo.png" alt="OpenCV logo">
+        </div>
+        <div class="logo" title="Tesseract OCR">
+          <img src="https://raw.githubusercontent.com/tesseract-ocr/tesseract/master/doc/tesseract.png" alt="Tesseract logo">
+        </div>
+      </div>
+
+      <div class="tech-details">
+        <div class="tech-card">
+          <strong style="font-size:1rem">Python — Motor de captura y análisis</strong>
+          <p>Python se utilizó como núcleo del tracker: captura de video o frames desde webcam, preprocesado de imagen (filtros, binarización), detección inteligente de las regiones donde aparecen los valores y OCR para extraer texto numérico.</p>
+          <div class="list"><span class="pill">OpenCV</span><span class="pill">NumPy</span><span class="pill">Tesseract</span></div>
+        </div>
+
+        <div class="tech-card">
+          <strong style="font-size:1rem">React — Interfaces web responsivas</strong>
+          <p>React construye la interfaz en la que el operador ve el flujo de valores en tiempo real, gráficos, estado de la corrida y controles para iniciar/parar. Se priorizó la usabilidad móvil y animaciones suaves para mejorar la experiencia del usuario.</p>
+          <div class="list"><span class="pill">React Router</span><span class="pill">JSX</span><span class="pill">Tailwind</span></div>
+        </div>
+
+        <div class="tech-card">
+          <strong style="font-size:1rem">Node.js — Servidor y procesamiento</strong>
+          <p>Node.js actúa como servidor que recibe los paquetes de datos enviados desde la UI (React). Además realiza procesamiento por lotes, validaciones, cálculo de promedios y genera un archivo Excel con las mediciones finales.</p>
+          <div class="list"><span class="pill">Express</span><span class="pill">ExcelJS</span><span class="pill">Socket.IO</span></div>
+        </div>
+      </div>
+
+      <div class="about card" style="margin-top:8px">
+        <h3 style="margin-bottom:8px">Sobre el funcionamiento en detalle</h3>
+        <p>1) El módulo Python captura frames de vídeo (o lee un archivo). Mediante OpenCV se localizan las zonas relevantes del medidor. Se aplican transformaciones (umbral, corrección de perspectiva) y luego se ejecuta Tesseract (u otro OCR) para extraer los dígitos. Se filtran y validan los valores mediante reglas (rango esperado, suavizado temporal).</p>
+        <p>2) Los valores extraídos se empaquetan y se envían a la interfaz React (ej.: mediante una petición REST o WebSocket) para mostrar en tiempo real y permitir la interacción del operador.</p>
+        <p>3) Cuando la corrida finaliza (30 mediciones) la UI envía a Node.js el lote completo. El servidor aplica validaciones adicionales, calcula promedios y genera un archivo Excel con formato claro (columnas, promedios, timestamps). Este Excel se puede descargar desde la UI o almacenarse en un repositorio en red.</p>
+      </div>
+    </section>
+
+    <footer>© 2025 — Tracker de Valores Automatizado • Soluciones SOSA</footer>
+  </div>
+
+  <script>
+    const video = document.getElementById('projectVideo');
+    const wrapper = document.querySelector('.video-wrapper');
+
+    video.addEventListener('timeupdate', () => {
+      if (video.currentTime >= 42 && video.currentTime < 66) {
+        wrapper.classList.add('rotated');
+      } else {
+        wrapper.classList.remove('rotated');
+      }
+    });
+
+    video.addEventListener('loadedmetadata', () => {
+      const meta = document.querySelector('.video-meta .muted');
+      if (meta) {
+        meta.textContent = `Duración: ${Math.floor(video.duration/60)}:${String(Math.floor(video.duration%60)).padStart(2,'0')}`;
+      }
+    });
+  </script>
+</body>
+</html>
