@@ -315,9 +315,6 @@
         <div class="logo" title="OpenCV">
           <img src="https://opencv.org/wp-content/uploads/2020/07/cropped-OpenCV_logo.png" alt="OpenCV logo">
         </div>
-        <div class="logo" title="Tesseract OCR">
-          <img src="https://raw.githubusercontent.com/tesseract-ocr/tesseract/master/doc/tesseract.png" alt="Tesseract logo">
-        </div>
       </div>
 
       <div class="tech-details">
@@ -343,8 +340,8 @@
       <div class="about card" style="margin-top:8px">
         <h3 style="margin-bottom:8px">Sobre el funcionamiento en detalle</h3>
         <p>1) El módulo Python captura frames de vídeo (o lee un archivo). Mediante OpenCV se localizan las zonas relevantes del medidor. Se aplican transformaciones (umbral, corrección de perspectiva) y luego se ejecuta Tesseract (u otro OCR) para extraer los dígitos. Se filtran y validan los valores mediante reglas (rango esperado, suavizado temporal).</p>
-        <p>2) Los valores extraídos se empaquetan y se envían a la interfaz React (ej.: mediante una petición REST o WebSocket) para mostrar en tiempo real y permitir la interacción del operador.</p>
-        <p>3) Cuando la corrida finaliza (30 mediciones) la UI envía a Node.js el lote completo. El servidor aplica validaciones adicionales, calcula promedios y genera un archivo Excel con formato claro (columnas, promedios, timestamps). Este Excel se puede descargar desde la UI o almacenarse en un repositorio en red.</p>
+        <p>2) Los valores extraídos se empaquetan y se envían a la interfaz React para mostrar en tiempo real y permitir la interacción del operador.</p>
+        <p>3) Cuando la corrida finaliza (x cantidad de mediciones) la UI envía a Node.js el lote completo. El servidor aplica validaciones adicionales, calcula promedios y genera un archivo Excel con formato claro (columnas, promedios, etc). Este Excel se puede descargar desde la UI, almacenarse en un repositorio en red o verse desde la PC.</p>
       </div>
     </section>
 
@@ -465,3 +462,4 @@
   </script>
 </body>
 </html>
+
