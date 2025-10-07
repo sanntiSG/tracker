@@ -49,12 +49,27 @@
     }
     
     .video-wrapper {
-      transform: scaleX(-1); /* Corrige el espejo */
+      transform: scaleX(-1); /* Corrige el espejo en PC */
       transform-origin: center;
       transition: transform 0.9s cubic-bezier(.2,.9,.3,1);
     }
+    
+    /* En móviles, quitar el espejo */
+    @media (max-width: 768px) {
+      .video-wrapper {
+        transform: scaleX(1); /* Sin espejo en móviles */
+      }
+    }
+    
     .video-wrapper.rotated {
-      transform: scaleX(-1) rotate(90deg); /* Rotación + espejo corregido */
+      transform: scaleX(-1) rotate(90deg); /* Rotación + espejo en PC */
+    }
+    
+    /* Rotación diferente para móviles */
+    @media (max-width: 768px) {
+      .video-wrapper.rotated {
+        transform: scaleX(1) rotate(-90deg); /* Rotación sin espejo en móviles */
+      }
     }
 
     video{
@@ -359,6 +374,9 @@
     const volumeSlider = document.getElementById('volumeSlider');
     const volumeLevel = document.getElementById('volumeLevel');
 
+    // Detectar si es móvil
+    const isMobile = window.innerWidth <= 768;
+
     // Formatear tiempo en minutos:segundos
     function formatTime(seconds) {
       const mins = Math.floor(seconds / 60);
@@ -450,6 +468,15 @@
 
     // Inicializar volumen
     volumeLevel.style.width = `${video.volume * 100}%`;
+    
+    // Manejar cambios de tamaño de ventana
+    window.addEventListener('resize', () => {
+      // Si cambia entre móvil y desktop, recargar para aplicar los estilos correctos
+      const newIsMobile = window.innerWidth <= 768;
+      if (newIsMobile !== isMobile) {
+        location.reload();
+      }
+    });
   </script>
 </body>
 </html>
